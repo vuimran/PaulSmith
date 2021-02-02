@@ -1,0 +1,98 @@
+<?php
+$productInquiryHelper = $this->helper(\PaulSmith\OutOfStockProductInquiry\Helper\Data::class);
+?>
+<div class="inquiry-form-modal" style="display:none;">
+    <div><h2 class="inquiry_title"><?php echo __('Out of stock product inquiry');?></h2></div>
+    <hr>
+    <form id="inquiry-form" method="post" class="form" data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <div class="fields">
+                <div class="field response_message">&nbsp;</div>
+                <div class="field product-sku required">
+                    <label class="label"
+                           for="product_sku"><span><?= $block->escapeHtml(__('Product Sku')) ?></span></label>
+                    <div class="control">
+                        <input placeholder="<?= $block->escapeHtmlAttr(__('Product Sku')) ?>" name="product_sku"
+                               title="<?= $block->escapeHtmlAttr(__('Product Sku')) ?>"
+                               value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('product_sku')) ?>"
+                               class="input-text product_sku" type="text" data-validate='{"required":true}'/>
+                    </div>
+                </div>
+                <div class="field customer-name required">
+                    <label class="label" for="customer_name"><span><?= $block->escapeHtml(__('Customer Name')) ?></span></label>
+                    <div class="control">
+                        <input placeholder="<?= $block->escapeHtmlAttr(__('Customer Name')) ?>"
+                               name="customer_name"
+                               title="<?= $block->escapeHtmlAttr(__('Customer Name')) ?>"
+                               value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('customer_name')) ?>"
+                               class="input-text" type="text" data-validate='{"required":true}'/>
+                    </div>
+                </div>
+
+                <div class="field customer-email required">
+                    <label class="label"
+                           for="customer_email"><span><?= $block->escapeHtml(__('Customer Email')) ?></span></label>
+                    <div class="control">
+                        <input placeholder="<?= $block->escapeHtmlAttr(__('Customer Email')) ?>"
+                               name="customer_email"
+                               title="<?= $block->escapeHtmlAttr(__('Customer Email')) ?>"
+                               value="<?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('email_name')) ?>"
+                               class="input-text" type="text" data-validate="{required:true, 'validate-email':true}"/>
+                    </div>
+                </div>
+                <div class="field query required">
+                    <label class="label" for="query"><span><?= $block->escapeHtml(__('Query')) ?></span></label>
+                    <div class="control">
+                        <textarea placeholder="<?= $block->escapeHtmlAttr(__('Query')) ?>"
+                                  data-validate='{"required":true}' name="query" class="query"
+                                  title="<?= $block->escapeHtmlAttr(__('Query')) ?>" cols="30"
+                                  rows="10"><?= $block->escapeHtmlAttr($this->helper(\Magento\Contact\Helper\Data::class)->getPostValue('query')) ?></textarea>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="actions-toolbar">
+            <div class="primary">
+                <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary"
+                        id="submit_button">
+                    <span><?= $block->escapeHtml(__('Submit')) ?></span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--IB yet to move to the JS Module-->
+<script>
+    require(['jquery', 'mage/validation'], function ($) {
+        var dataForm = $('#inquiry-form');
+        dataForm.mage('validation', {});
+        $('#submit_button').click(function () {
+            var status = dataForm.validation('isValid');
+            if (status) {
+                $.ajax({
+                    type: 'post',
+                    url: '<?= $block->escapeUrl($block->getUrl("paulsmith_outofstockproductinquiry")) ?>',
+                    data: $('#inquiry-form').serialize(),
+                    cache: false,
+                    showLoader: 'true',
+                    success: function (response) {
+                        var response_code = response;
+                        if (response_code == '1') {
+                            $('.response_message').css('color', 'green');
+                            $('.response_message').text('Thank you for your inquiry. We will respond you as soon as possible.');
+                            $('.response_message').show();
+                            setTimeout(function () {
+                                $(".inquiry-form-modal").modal("closeModal");
+                            }, 2000);
+                        } else {
+                            $('.response_message').css('color', 'red');
+                            $('.response_message').text('We cannot process your request at this stage. Please try later.');
+                            $('.response_message').show();
+                        }
+                    }
+                });
+                return false;
+            }
+        });
+    });
+</script>

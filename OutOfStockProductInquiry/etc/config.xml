@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <out_of_stock_product_inquiry>
+            <configuration>
+                <enable>0</enable>
+                <send_email_to>general</send_email_to>
+                <email_template>product_inquiry_general_email_template</email_template>
+            </configuration>
+            <frontend_settings>
+                <link_title>Send Product Inquiry</link_title>
+            </frontend_settings>
+        </out_of_stock_product_inquiry>
+    </default>
+</config>

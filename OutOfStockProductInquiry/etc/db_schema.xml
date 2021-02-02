@@ -1,0 +1,14 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="paulsmith_outofstockproduct_inquiry" resource="default" engine="innodb"
+       comment="Paul Smith Out Of Stock Product Inquiry Table">
+    <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity ID"/>
+    <column xsi:type="varchar" name="customer_name" nullable="false" length="100" comment="Customer Name"/>
+    <column xsi:type="varchar" name="customer_email" nullable="false" length="100" comment="Customer Email"/>
+    <column xsi:type="text" name="query" nullable="false" comment="Query"/>
+    <column xsi:type="varchar" name="product_sku" nullable="false" length="50" comment="Product Sku"/>
+    <column xsi:type="datetime" name="datetime" nullable="false" comment="Value"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+    </constraint>
+</table>
+</schema>

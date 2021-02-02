@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!--IB add logo-->
+        <add id="PaulSmith_OutOfStockProductInquiry::menu"
+             title="Paul Smith"
+             module="PaulSmith_OutOfStockProductInquiry"
+             translate="title"
+             sortOrder="69"
+             resource="PaulSmith_OutOfStockProductInquiry::menu"/>
+
+
+        <add id="PaulSmith_OutOfStockProductInquiry::OutOfStockProductInquiry" title="Out Of Stock Product Inquiry"
+             module="PaulSmith_OutOfStockProductInquiry" sortOrder="1"
+             resource="PaulSmith_OutOfStockProductInquiry::paulsmith_outofstockproductinquiry"
+             parent="PaulSmith_OutOfStockProductInquiry::menu"
+        />
+        <add id="PaulSmith_OutOfStockProductInquiry::OutOfStockProductCustomerInquiries" title="Customer Inquiries"
+             module="PaulSmith_OutOfStockProductInquiry" action="paulsmith_outofstockproductinquiry" sortOrder="1"
+             resource="PaulSmith_OutOfStockProductInquiry::paulsmith_outofstockproductinquiry"
+             parent="PaulSmith_OutOfStockProductInquiry::OutOfStockProductInquiry"
+        />
+        <!--IB Configuration Section-->
+        <add id="PaulSmith_OutOfStockProductInquiry::Configurations" title="Configurations"
+             module="PaulSmith_OutOfStockProductInquiry" action="admin/system_config/edit/section/out_of_stock_product_inquiry/" sortOrder="2"
+             resource="PaulSmith_OutOfStockProductInquiry::paulsmith_outofstockproductinquiry"
+             parent="PaulSmith_OutOfStockProductInquiry::OutOfStockProductInquiry"
+        />
+    </menu>
+</config>

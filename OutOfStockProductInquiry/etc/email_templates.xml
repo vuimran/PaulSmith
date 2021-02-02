@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="out_of_stock_product_inquiry_configuration_email_template" label=" Out of Stock Product Inquiry Template"
+              file="out_of_stock_product_inquiry_configuration_email_template.html" type="html" module="PaulSmith_OutOfStockProductInquiry" area="frontend"/>
+</config>

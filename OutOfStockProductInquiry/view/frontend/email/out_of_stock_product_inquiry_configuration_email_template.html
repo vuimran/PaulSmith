@@ -1,0 +1,31 @@
+<!--@subject Out Of Stock Product Inquiry@-->
+<!--@vars {
+"var data.query":"Query",
+"var data.email":"Customer Email",
+"var data.sku":"Product Sku",
+"var data.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<h1>{{trans "An Out of stock inquiry request is recieved with the following information."}}</h1>
+<table class="message-details">
+    <tr>
+        <td><strong>{{trans "Customer Name"}}:</strong></td>
+        <td>{{var Name}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Customer Email"}}:</strong></td>
+        <td>{{var Email}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Product SKU"}}:</strong></td>
+        <td>{{var Sku}}</td>
+    </tr>
+    <tr>
+        <td><strong>{{trans "Query"}}:</strong></td>
+        <td>{{var query}}</td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}
